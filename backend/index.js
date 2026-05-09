@@ -1,7 +1,7 @@
 // backend/index.js
 import express from "express";
 import cors from "cors";
-import { authMiddleware, requireAuth } from "./middleware/auth.js";
+import { authMiddleware } from "./middleware/auth.js";
 
 const app = express();
 
@@ -12,10 +12,7 @@ app.use(cors());
 // Protected route
 app.get("/", (req, res) => {
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
-});
-
-app.get("/profile", requireAuth, (req, res) => {
-  res.json(req.oidc.user);
+  console.log("User info:", req.oidc.user);
 });
 
 const PORT = process.env.PORT || 3000;

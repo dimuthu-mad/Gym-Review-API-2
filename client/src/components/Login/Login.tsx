@@ -1,7 +1,9 @@
 const Login = () => {
   return (
     <div>
-      <h2>Login</h2>
+      <a href="http://localhost:3000/login">Login</a>
+      <br />
+      <a href="http://localhost:3000/logout">Logout</a>
     </div>
   );
 };

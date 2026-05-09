@@ -1,4 +1,4 @@
-import { auth, requiresAuth } from "express-openid-connect";
+import { auth } from "express-openid-connect";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -13,4 +13,3 @@ const config = {
 };
 
 export const authMiddleware = auth(config);
-export const requireAuth = requiresAuth();
