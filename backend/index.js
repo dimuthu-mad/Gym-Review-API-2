@@ -31,5 +31,11 @@ app.get("/profile", requiresAuth(), (req, res) => {
   }
 });
 
+app.get("/auth/logout", (req, res) => {
+  return res.oidc.logout({
+    returnTo: process.env.FRONTEND_URL || "http://localhost:5173",
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
