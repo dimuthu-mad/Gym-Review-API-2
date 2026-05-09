@@ -3,6 +3,7 @@ import Main from "./Layout/Main";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
+import Gyms from "./components/Gyms/Gyms";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "gyms",
+        element: <Gyms />,
       },
     ],
   },

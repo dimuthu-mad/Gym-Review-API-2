@@ -71,6 +71,21 @@ const Header = () => {
         >
           Profile
         </Link>
+
+        <Link
+          to="/gyms"
+          style={{
+            color: "white",
+            textDecoration: "none",
+            fontSize: "16px",
+            fontWeight: "500",
+            backgroundColor: "#a3a3db",
+            padding: "8px 16px",
+            borderRadius: "8px",
+          }}
+        >
+          Gyms
+        </Link>
       </nav>
     </header>
   );
