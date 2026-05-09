@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+type UserProfile = {
+  given_name?: string;
+  family_name?: string;
+  email?: string;
+  picture?: string;
+};
+
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/profile", {
-          withCredentials: true,
-        });
+        const response = await axios.get<UserProfile>(
+          "http://localhost:3000/profile",
+          {
+            withCredentials: true,
+          },
+        );
         setUser(response.data);
       } catch (error) {
         setUser(null);
