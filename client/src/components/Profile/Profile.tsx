@@ -31,7 +31,14 @@ const Profile = () => {
   return (
     <div>
       <h1>Profile</h1>
-      <p>Name: {user.name}</p>
+      <h2>Name: {user.given_name || user.family_name}</h2>
+      {user.picture && (
+        <img
+          src={user.picture}
+          alt="Profile"
+          style={{ width: "100px", borderRadius: "50%" }}
+        />
+      )}
       <p>Email: {user.email}</p>
     </div>
   );

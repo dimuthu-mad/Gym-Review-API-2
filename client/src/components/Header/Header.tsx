@@ -56,6 +56,21 @@ const Header = () => {
         >
           Login
         </Link>
+
+        <Link
+          to="/profile"
+          style={{
+            color: "white",
+            textDecoration: "none",
+            fontSize: "16px",
+            fontWeight: "500",
+            backgroundColor: "#79f63b",
+            padding: "8px 16px",
+            borderRadius: "8px",
+          }}
+        >
+          Profile
+        </Link>
       </nav>
     </header>
   );
