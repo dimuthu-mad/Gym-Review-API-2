@@ -1,19 +1,16 @@
-import admin from "../firebaseAdmin.js";
+import { auth, requiresAuth } from "express-openid-connect";
+import dotenv from "dotenv";
+dotenv.config();
 
-export const verifyToken = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader?.split(" ")[1];
-
-  if (!token) {
-    return res.status(401).json({ message: "No token provided" });
-  }
-
-  try {
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    req.user = decodedToken; // Attach user info to request object
-    next();
-  } catch (error) {
-    console.error("Error verifying token:", error.message);
-    res.status(401).json({ message: "Unauthorized" });
-  }
+// Auth0 configuration
+const config = {
+  authRequired: false, // Allow public routes
+  auth0Logout: true, // Use Auth0 logout endpoint
+  secret: process.env.SECRET,
+  baseURL: process.env.BASE_URL,
+  clientID: process.env.CLIENT_ID,
+  issuerBaseURL: process.env.ISSUER_BASE_URL,
 };
+
+export const authMiddleware = auth(config);
+export const requireAuth = requiresAuth();
