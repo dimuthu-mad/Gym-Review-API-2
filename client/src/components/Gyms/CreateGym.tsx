@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./CreateGym.css";
@@ -10,13 +10,36 @@ const CreateGym = () => {
   const [rating, setRating] = useState<number | "">("");
   const [membershipPrice, setMembershipPrice] = useState<number | "">("");
   const [error, setError] = useState<string | null>(null);
-  const [notAuthenticated, setNotAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        await axios.get("http://localhost:3000/profile", {
+          withCredentials: true,
+        });
+        setIsAuthenticated(true);
+      } catch {
+        setIsAuthenticated(false);
+      } finally {
+        setAuthChecking(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (!isAuthenticated) {
+      setError("You must be logged in to create a gym.");
+      return;
+    }
 
     if (!name || !location) {
       setError("Name and location are required.");
@@ -41,7 +64,7 @@ const CreateGym = () => {
     } catch (err: any) {
       const status = err?.response?.status;
       if (status === 401 || status === 403) {
-        setNotAuthenticated(true);
+        setIsAuthenticated(false);
         setError("You must be logged in to create a gym.");
       } else {
         setError(err?.response?.data?.error || "Failed to create gym");
@@ -55,9 +78,11 @@ const CreateGym = () => {
     <div className="create-gym-container">
       <div className="create-gym-card">
         <h2 className="cg-title">Create Gym</h2>
-        {/* {error && <div className="cg-error">{error}</div>} */}
+        {error && <div className="cg-error">{error}</div>}
 
-        {notAuthenticated ? (
+        {authChecking ? (
+          <p>Checking sign-in status...</p>
+        ) : !isAuthenticated ? (
           <div className="cg-signin">
             <h3>Sign in required</h3>
             <p>You need to be signed in to create a gym.</p>
