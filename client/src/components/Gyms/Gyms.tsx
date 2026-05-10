@@ -62,6 +62,7 @@ const GymData = () => {
                   <th>Location</th>
                   <th>Rating</th>
                   <th>Membership Price (SEK)</th>
+                  <th>Create Review</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,6 +77,9 @@ const GymData = () => {
                     <td>{gym.location}</td>
                     <td>{gym.rating}</td>
                     <td>{gym.membershipPrice.toFixed(2)}</td>
+                    <td>
+                      <Link to={`/gyms/${gym.id}/reviews`}>Create Review</Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>

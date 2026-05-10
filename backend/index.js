@@ -113,6 +113,27 @@ app.get("/gyms/:id", (req, res) => {
   }
 });
 
+app.post("/gyms/:id/reviews", requiresAuth(), (req, res) => {
+  try {
+    const gymId = parseInt(req.params.id);
+    const gym = gyms.find((g) => g.id === gymId);
+    if (!gym) {
+      return res.status(404).json({ error: "Gym not found" });
+    }
+    const { user, rating, comment } = req.body;
+    const newReview = {
+      id: gym.reviews.length + 1,
+      user,
+      rating,
+      comment,
+    };
+    gym.reviews.push(newReview);
+    res.status(201).json(newReview);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/gyms", requiresAuth(), (req, res) => {
   try {
     const { name, location, description, rating, membershipPrice } = req.body;

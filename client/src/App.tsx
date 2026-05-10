@@ -6,6 +6,7 @@ import Profile from "./components/Profile/Profile";
 import Gyms from "./components/Gyms/Gyms";
 import ViewGymById from "./components/Gyms/ViewGymById";
 import CreateGym from "./components/Gyms/CreateGym";
+import CreateReview from "./components/Reviews/CreateReview";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "gyms/:id",
         element: <ViewGymById />,
+      },
+      {
+        path: "gyms/:id/reviews",
+        element: <CreateReview />,
       },
     ],
   },
