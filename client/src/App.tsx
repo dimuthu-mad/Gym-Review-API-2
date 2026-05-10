@@ -5,6 +5,7 @@ import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import Gyms from "./components/Gyms/Gyms";
 import ViewGymById from "./components/Gyms/ViewGymById";
+import CreateGym from "./components/Gyms/CreateGym";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "gyms",
         element: <Gyms />,
+      },
+      {
+        path: "gyms/create",
+        element: <CreateGym />,
       },
       {
         path: "gyms/:id",

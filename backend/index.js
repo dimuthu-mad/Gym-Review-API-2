@@ -113,6 +113,25 @@ app.get("/gyms/:id", (req, res) => {
   }
 });
 
+app.post("/gyms", requiresAuth(), (req, res) => {
+  try {
+    const { name, location, description, rating, membershipPrice } = req.body;
+    const newGym = {
+      id: gyms.length + 1,
+      name,
+      location,
+      description,
+      rating,
+      membershipPrice,
+      reviews: [],
+    };
+    gyms.push(newGym);
+    res.status(201).json(newGym);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/profile", requiresAuth(), (req, res) => {
   try {
     res.json(req.oidc.user);

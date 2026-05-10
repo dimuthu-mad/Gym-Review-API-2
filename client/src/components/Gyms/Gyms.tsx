@@ -43,7 +43,10 @@ const GymData = () => {
 
   return (
     <div>
-      <h1>Gym Data</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h1>Gym Data</h1>
+        <Link to="/gyms/create"><button>Create Gym</button></Link>
+      </div>
       <table style={{ borderCollapse: "collapse", width: "100%" }}>
         <thead>
           <tr>
