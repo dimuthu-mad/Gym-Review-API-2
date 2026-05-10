@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <section className="home-container">
       <div className="home-card">
-        <p className="home-badge">Welcome</p>
+        <h1 className="home-badge">Welcome</h1>
         <h1 className="home-title">Find the right gym and share your review</h1>
         <p className="home-subtitle">
           Browse local gyms, check details and ratings, and help others by
