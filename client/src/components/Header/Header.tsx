@@ -86,6 +86,21 @@ const Header = () => {
         >
           Gyms
         </Link>
+
+        <Link
+          to="/gyms/create"
+          style={{
+            color: "white",
+            textDecoration: "none",
+            fontSize: "16px",
+            fontWeight: "500",
+            backgroundColor: "#a3a3db",
+            padding: "8px 16px",
+            borderRadius: "8px",
+          }}
+        >
+          Create Gym
+        </Link>
       </nav>
     </header>
   );

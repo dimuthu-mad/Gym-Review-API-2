@@ -14,6 +14,7 @@ type gymsProfile = {
 const GymData = () => {
   const [gyms, setGyms] = useState<gymsProfile[]>([]);
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchGyms = async () => {
@@ -37,15 +38,18 @@ const GymData = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  if (gyms.length === 0) {
-    return <div>No gym data available.</div>;
-  }
+  // show still the page even if empty so form is available
+  // if (gyms.length === 0) {
+  //   return <div>No gym data available.</div>;
+  // }
 
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1>Gym Data</h1>
-        <Link to="/gyms/create"><button>Create Gym</button></Link>
+        <Link to="/gyms/create">
+          <button>Create Gym</button>
+        </Link>
       </div>
       <table style={{ borderCollapse: "collapse", width: "100%" }}>
         <thead>
