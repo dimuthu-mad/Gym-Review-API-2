@@ -1,6 +1,27 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Header = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    const check = async () => {
+      try {
+        await axios.get("http://localhost:3000/profile", {
+          withCredentials: true,
+        });
+        setIsAuthenticated(true);
+      } catch {
+        setIsAuthenticated(false);
+      } finally {
+        setChecking(false);
+      }
+    };
+    check();
+  }, []);
+
   return (
     <header
       style={{
@@ -27,7 +48,8 @@ const Header = () => {
       <nav
         style={{
           display: "flex",
-          gap: "20px",
+          gap: "12px",
+          alignItems: "center",
         }}
       >
         <Link
@@ -43,21 +65,6 @@ const Header = () => {
         </Link>
 
         <Link
-          to="/login"
-          style={{
-            color: "white",
-            textDecoration: "none",
-            fontSize: "16px",
-            fontWeight: "500",
-            backgroundColor: "#3b82f6",
-            padding: "8px 16px",
-            borderRadius: "8px",
-          }}
-        >
-          Login
-        </Link>
-
-        <Link
           to="/profile"
           style={{
             color: "white",
@@ -65,7 +72,7 @@ const Header = () => {
             fontSize: "16px",
             fontWeight: "500",
             backgroundColor: "#79f63b",
-            padding: "8px 16px",
+            padding: "8px 12px",
             borderRadius: "8px",
           }}
         >
@@ -80,7 +87,7 @@ const Header = () => {
             fontSize: "16px",
             fontWeight: "500",
             backgroundColor: "#a3a3db",
-            padding: "8px 16px",
+            padding: "8px 12px",
             borderRadius: "8px",
           }}
         >
@@ -95,12 +102,45 @@ const Header = () => {
             fontSize: "16px",
             fontWeight: "500",
             backgroundColor: "#a3a3db",
-            padding: "8px 16px",
+            padding: "8px 12px",
             borderRadius: "8px",
           }}
         >
           Create Gym
         </Link>
+
+        {/* Auth button */}
+        {checking ? null : isAuthenticated ? (
+          <a
+            href="http://localhost:3000/auth/logout"
+            style={{
+              color: "white",
+              textDecoration: "none",
+              fontSize: "16px",
+              fontWeight: "500",
+              backgroundColor: "#ef4444",
+              padding: "8px 12px",
+              borderRadius: "8px",
+            }}
+          >
+            Logout
+          </a>
+        ) : (
+          <a
+            href="http://localhost:3000/login"
+            style={{
+              color: "white",
+              textDecoration: "none",
+              fontSize: "16px",
+              fontWeight: "500",
+              backgroundColor: "#3b82f6",
+              padding: "8px 12px",
+              borderRadius: "8px",
+            }}
+          >
+            Login
+          </a>
+        )}
       </nav>
     </header>
   );

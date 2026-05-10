@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import "./ViewGymById.css";
 
 type Review = {
   id: number;
@@ -44,42 +45,72 @@ const ViewGymById = () => {
     fetchGym();
   }, [id]);
 
-  if (loading) return <div>Loading gym details...</div>;
-  if (error) return <div>{error}</div>;
-  if (!gym) return <div>Gym not found.</div>;
+  if (loading)
+    return (
+      <div className="view-gym-container">
+        <div className="view-gym-card">Loading gym details...</div>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="view-gym-container">
+        <div className="view-gym-card vg-error">{error}</div>
+      </div>
+    );
+  if (!gym)
+    return (
+      <div className="view-gym-container">
+        <div className="view-gym-card">Gym not found.</div>
+      </div>
+    );
 
   return (
-    <div>
-      <p>
-        <Link to="/gyms">Back to gyms</Link>
-      </p>
-      <h1>{gym.name}</h1>
-      <p>
-        <strong>Location:</strong> {gym.location}
-      </p>
-      <p>
-        <strong>Description:</strong> {gym.description}
-      </p>
-      <p>
-        <strong>Rating:</strong> {gym.rating}
-      </p>
-      <p>
-        <strong>Membership Price:</strong> {gym.membershipPrice} SEK
-      </p>
+    <div className="view-gym-container">
+      <div className="view-gym-card">
+        <p className="vg-back">
+          <Link to="/gyms" className="vg-back-link">
+            ← Back to gyms
+          </Link>
+        </p>
+        <h1 className="vg-title">{gym.name}</h1>
 
-      <h2>Reviews</h2>
-      {gym.reviews.length === 0 ? (
-        <p>No reviews yet.</p>
-      ) : (
-        <ul>
-          {gym.reviews.map((review) => (
-            <li key={review.id}>
-              <strong>{review.user}</strong> ({review.rating}/5):{" "}
-              {review.comment}
-            </li>
-          ))}
-        </ul>
-      )}
+        <div className="vg-field">
+          <span className="vg-label">Location:</span>
+          <span className="vg-value">{gym.location}</span>
+        </div>
+
+        <div className="vg-field">
+          <span className="vg-label">Description:</span>
+          <span className="vg-value">{gym.description}</span>
+        </div>
+
+        <div className="vg-field">
+          <span className="vg-label">Rating:</span>
+          <span className="vg-value">{gym.rating}</span>
+        </div>
+
+        <div className="vg-field">
+          <span className="vg-label">Membership Price:</span>
+          <span className="vg-value">{gym.membershipPrice} SEK</span>
+        </div>
+
+        <h2 className="vg-subtitle">Reviews</h2>
+        {gym.reviews.length === 0 ? (
+          <p className="vg-no-reviews">No reviews yet.</p>
+        ) : (
+          <ul className="vg-reviews">
+            {gym.reviews.map((review) => (
+              <li key={review.id} className="vg-review-item">
+                <div className="vr-header">
+                  <strong>{review.user}</strong>
+                  <span className="vr-rating">{` (${review.rating}/5)`}</span>
+                </div>
+                <div className="vr-comment">{review.comment}</div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
