@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 type gymsProfile = {
   id: number;
   name: string;
   location: string;
+  description: string;
+  rating: number;
+  membershipPrice: number;
 };
 
 const GymData = () => {
@@ -40,12 +44,42 @@ const GymData = () => {
   return (
     <div>
       <h1>Gym Data</h1>
-      {gyms.map((gym) => (
-        <div key={gym.id}>
-          <h3>Name: {gym.name}</h3>
-          <h3>Location: {gym.location}</h3>
-        </div>
-      ))}
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>ID</th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Name</th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+              Location
+            </th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Rating</th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+              Membership Price(Sek)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {gyms.map((gym) => (
+            <tr key={gym.id}>
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <Link to={`/gyms/${gym.id}`}>{gym.id}</Link>
+              </td>
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                <Link to={`/gyms/${gym.id}`}>{gym.name}</Link>
+              </td>
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                {gym.location}
+              </td>
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                {gym.rating}
+              </td>
+              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                {gym.membershipPrice.toFixed(2)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
