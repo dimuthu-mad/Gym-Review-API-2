@@ -1,0 +1,114 @@
+.create-gym-container {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: #f7f9fb;
+  min-height: 60vh;
+}
+
+.create-gym-card {
+  width: 100%;
+  max-width: 680px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(20, 20, 30, 0.04);
+  padding: 20px 22px;
+}
+
+.cg-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+  color: #222;
+}
+
+.cg-error {
+  color: #b00020;
+  background: #ffefef;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.cg-signin {
+  border-radius: 8px;
+  padding: 14px;
+  background: linear-gradient(180deg, #fff9f2 0%, #fff6ee 100%);
+  border: 1px solid #ffecd2;
+}
+
+.cg-signin h3 {
+  margin: 0 0 8px;
+}
+
+.cg-signin p {
+  margin: 0;
+}
+
+.cg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cg-field label {
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+  font-weight: 600;
+}
+
+.cg-input,
+.cg-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.cg-textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.cg-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: flex-end;
+}
+
+.cg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.cg-btn-primary {
+  background: #0069ff;
+  color: #fff;
+}
+
+.cg-btn-ghost {
+  background: #f4f6f8;
+  color: #222;
+}
+
+@media (max-width: 520px) {
+  .create-gym-card {
+    padding: 14px;
+  }
+
+  .cg-actions {
+    flex-direction: column;
+  }
+}

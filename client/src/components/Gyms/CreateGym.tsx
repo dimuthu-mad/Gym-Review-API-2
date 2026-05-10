@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import "./CreateGym.css";
 
 const CreateGym = () => {
   const [name, setName] = useState("");
@@ -51,73 +52,101 @@ const CreateGym = () => {
   };
 
   return (
-    <div style={{ maxWidth: 600 }}>
-      <h2>Create Gym</h2>
-      {error && <div style={{ color: "red", marginBottom: 8 }}>{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: 8 }}>
-          <label>Name *</label>
-          <br />
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div style={{ marginBottom: 8 }}>
-          <label>Location *</label>
-          <br />
-          <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div style={{ marginBottom: 8 }}>
-          <label>Description</label>
-          <br />
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div style={{ marginBottom: 8 }}>
-          <label>Rating (number)</label>
-          <br />
-          <input
-            type="number"
-            value={rating}
-            onChange={(e) =>
-              setRating(e.target.value === "" ? "" : Number(e.target.value))
-            }
-            min={0}
-            max={5}
-            step={0.1}
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div style={{ marginBottom: 8 }}>
-          <label>Membership Price (SEK)</label>
-          <br />
-          <input
-            type="number"
-            value={membershipPrice}
-            onChange={(e) =>
-              setMembershipPrice(
-                e.target.value === "" ? "" : Number(e.target.value),
-              )
-            }
-            min={0}
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div>
-          <button type="submit" disabled={loading}>
-            {loading ? "Creating..." : "Create Gym"}
-          </button>
-        </div>
-      </form>
+    <div className="create-gym-container">
+      <div className="create-gym-card">
+        <h2 className="cg-title">Create Gym</h2>
+        {/* {error && <div className="cg-error">{error}</div>} */}
+
+        {notAuthenticated ? (
+          <div className="cg-signin">
+            <h3>Sign in required</h3>
+            <p>You need to be signed in to create a gym.</p>
+            <div className="cg-actions">
+              <a
+                className="cg-btn cg-btn-primary"
+                href="http://localhost:3000/login"
+              >
+                Sign in
+              </a>
+              <Link className="cg-btn cg-btn-ghost" to="/gyms">
+                Back to gyms
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <form className="cg-form" onSubmit={handleSubmit}>
+            <div className="cg-field">
+              <label>Name *</label>
+              <input
+                className="cg-input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+
+            <div className="cg-field">
+              <label>Location *</label>
+              <input
+                className="cg-input"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
+
+            <div className="cg-field">
+              <label>Description</label>
+              <textarea
+                className="cg-textarea"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            <div className="cg-field">
+              <label>Rating (number)</label>
+              <input
+                className="cg-input"
+                type="number"
+                value={rating}
+                onChange={(e) =>
+                  setRating(e.target.value === "" ? "" : Number(e.target.value))
+                }
+                min={0}
+                max={5}
+                step={0.1}
+              />
+            </div>
+
+            <div className="cg-field">
+              <label>Membership Price (SEK)</label>
+              <input
+                className="cg-input"
+                type="number"
+                value={membershipPrice}
+                onChange={(e) =>
+                  setMembershipPrice(
+                    e.target.value === "" ? "" : Number(e.target.value),
+                  )
+                }
+                min={0}
+              />
+            </div>
+
+            <div className="cg-actions">
+              <button
+                className="cg-btn cg-btn-primary"
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Creating..." : "Create Gym"}
+              </button>
+              <Link className="cg-btn cg-btn-ghost" to="/gyms">
+                Cancel
+              </Link>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
 };
