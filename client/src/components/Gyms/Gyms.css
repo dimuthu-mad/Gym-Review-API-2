@@ -1,0 +1,99 @@
+.gyms-page {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: #f7f9fb;
+  min-height: 60vh;
+}
+
+.gyms-card {
+  width: 100%;
+  max-width: 980px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(20, 20, 30, 0.04);
+  padding: 20px 22px;
+}
+
+.gyms-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.gyms-header h1 {
+  margin: 0;
+  font-size: 20px;
+  color: #222;
+}
+
+.gyms-create-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  background: #0069ff;
+  color: #fff;
+}
+
+.gyms-table-wrap {
+  overflow-x: auto;
+}
+
+.gyms-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.gyms-table th,
+.gyms-table td {
+  text-align: left;
+  border-bottom: 1px solid #ececec;
+  padding: 10px 8px;
+  color: #333;
+}
+
+.gyms-table th {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.gyms-table a {
+  color: #0057d8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.gyms-table a:hover {
+  text-decoration: underline;
+}
+
+.gyms-empty {
+  color: #666;
+  margin: 8px 0 0;
+}
+
+.gyms-loading {
+  padding: 24px;
+  color: #444;
+}
+
+@media (max-width: 640px) {
+  .gyms-card {
+    padding: 14px;
+  }
+
+  .gyms-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

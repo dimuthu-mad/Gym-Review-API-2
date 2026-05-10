@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./Gyms.css";
 
 type gymsProfile = {
   id: number;
@@ -14,7 +15,6 @@ type gymsProfile = {
 const GymData = () => {
   const [gyms, setGyms] = useState<gymsProfile[]>([]);
   const [loading, setLoading] = useState(true);
-  
 
   useEffect(() => {
     const fetchGyms = async () => {
@@ -36,7 +36,7 @@ const GymData = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="gyms-loading">Loading...</div>;
   }
   // show still the page even if empty so form is available
   // if (gyms.length === 0) {
@@ -44,49 +44,45 @@ const GymData = () => {
   // }
 
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <h1>Gym Data</h1>
-        <Link to="/gyms/create">
-          <button>Create Gym</button>
-        </Link>
+    <div className="gyms-page">
+      <div className="gyms-card">
+        <div className="gyms-header">
+          <h1>Gym Data</h1>
+        </div>
+
+        {gyms.length === 0 ? (
+          <p className="gyms-empty">No gym data available.</p>
+        ) : (
+          <div className="gyms-table-wrap">
+            <table className="gyms-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Location</th>
+                  <th>Rating</th>
+                  <th>Membership Price (SEK)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gyms.map((gym) => (
+                  <tr key={gym.id}>
+                    <td>
+                      <Link to={`/gyms/${gym.id}`}>{gym.id}</Link>
+                    </td>
+                    <td>
+                      <Link to={`/gyms/${gym.id}`}>{gym.name}</Link>
+                    </td>
+                    <td>{gym.location}</td>
+                    <td>{gym.rating}</td>
+                    <td>{gym.membershipPrice.toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
-      <table style={{ borderCollapse: "collapse", width: "100%" }}>
-        <thead>
-          <tr>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>ID</th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Name</th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
-              Location
-            </th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Rating</th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
-              Membership Price(Sek)
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {gyms.map((gym) => (
-            <tr key={gym.id}>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                <Link to={`/gyms/${gym.id}`}>{gym.id}</Link>
-              </td>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                <Link to={`/gyms/${gym.id}`}>{gym.name}</Link>
-              </td>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {gym.location}
-              </td>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {gym.rating}
-              </td>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {gym.membershipPrice.toFixed(2)}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };
