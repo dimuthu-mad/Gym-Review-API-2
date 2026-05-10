@@ -88,7 +88,7 @@ const gyms = [
 // Protected route
 app.get("/", (req, res) => {
   return res.oidc.login({
-    returnTo: "http://localhost:5173/profile",
+    returnTo: "http://localhost:5173",
   });
 });
 
@@ -156,7 +156,6 @@ app.post("/gyms", requiresAuth(), (req, res) => {
 app.get("/profile", requiresAuth(), (req, res) => {
   try {
     res.json(req.oidc.user);
-    console.log(req.oidc.user);
   } catch (error) {
     console.log(error);
   }
