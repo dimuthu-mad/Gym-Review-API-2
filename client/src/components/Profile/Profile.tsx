@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./Profile.css";
 
 type UserProfile = {
   given_name?: string;
@@ -32,24 +33,37 @@ const Profile = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="profile-container">
+        <div className="profile-card">Loading...</div>
+      </div>
+    );
   }
   if (!user) {
-    return <div>Please log in to view your profile.</div>;
+    return (
+      <div className="profile-container">
+        <div className="profile-card profile-empty">
+          Please log in to view your profile.
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <h2>Name: {user.given_name || user.family_name}</h2>
-      {user.picture && (
-        <img
-          src={user.picture}
-          alt="Profile"
-          style={{ width: "100px", borderRadius: "50%" }}
-        />
-      )}
-      <p>Email: {user.email}</p>
+    <div className="profile-container">
+      <div className="profile-card">
+        <h1 className="profile-title">Profile</h1>
+        {user.picture && (
+          <img src={user.picture} alt="Profile" className="profile-picture" />
+        )}
+        <h2 className="profile-name">
+          {user.given_name || user.family_name || "Unknown"}
+        </h2>
+        <div className="profile-field">
+          <span className="profile-label">Email:</span>
+          <span className="profile-value">{user.email}</span>
+        </div>
+      </div>
     </div>
   );
 };

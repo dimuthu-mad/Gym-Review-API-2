@@ -156,6 +156,7 @@ app.post("/gyms", requiresAuth(), (req, res) => {
 app.get("/profile", requiresAuth(), (req, res) => {
   try {
     res.json(req.oidc.user);
+    console.log(req.oidc.user);
   } catch (error) {
     console.log(error);
   }
