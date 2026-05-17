@@ -43,7 +43,9 @@ const Profile = () => {
     return (
       <div className="profile-container">
         <div className="profile-card profile-empty">
-          Please log in to view your profile.
+          <p className="profile-empty-text">
+            Please log in to view your profile.
+          </p>
         </div>
       </div>
     );
@@ -57,12 +59,14 @@ const Profile = () => {
           <img src={user.picture} alt="Profile" className="profile-picture" />
         )}
         <h2 className="profile-name">
-          {user.given_name || user.family_name || "Unknown"}
+          Name: {user.given_name || user.family_name || "Unknown"}{" "}
+          {user.family_name && ` ${user.family_name}`}
         </h2>
-        <div className="profile-field">
+        <h2 className="profile-name">Email: {user.email}</h2>
+        {/* <div className="profile-field">
           <span className="profile-label">Email:</span>
-          <span className="profile-value">{user.email}</span>
-        </div>
+          <span className="profile-value">Email: {user.email}</span>
+        </div> */}
       </div>
     </div>
   );

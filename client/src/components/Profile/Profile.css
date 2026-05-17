@@ -64,6 +64,19 @@
   font-weight: 500;
 }
 
+.profile-empty {
+  background: #fff8e1;
+  border: 1px solid #ffd54f;
+  color: #bc0909;
+  text-align: center;
+}
+
+.profile-empty-text {
+  margin: 0;
+  font-weight: 600;
+  color: #bc0909;
+}
+
 @media (max-width: 520px) {
   .profile-card {
     padding: 14px;

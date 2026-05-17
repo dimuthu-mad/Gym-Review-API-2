@@ -74,7 +74,7 @@ const CreateReview = () => {
   return (
     <div className="create-gym-container">
       <div className="create-gym-card">
-        <h2 className="cg-title">Create Gym</h2>
+        <h2 className="cg-title">Create Review</h2>
         {error && <div className="cg-error">{error}</div>}
 
         {authChecking ? (
@@ -82,7 +82,7 @@ const CreateReview = () => {
         ) : !isAuthenticated ? (
           <div className="cg-signin">
             <h3>Sign in required</h3>
-            <p>You need to be signed in to create a gym.</p>
+            <p>You need to be signed in to create a review.</p>
             <div className="cg-actions">
               <a
                 className="cg-btn cg-btn-primary"
