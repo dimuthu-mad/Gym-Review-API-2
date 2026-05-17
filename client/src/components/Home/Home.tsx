@@ -7,10 +7,10 @@ const Home = () => {
       <div className="home-card">
         <h1 className="home-badge">Welcome</h1>
         <h1 className="home-title">Find the right gym and share your review</h1>
-        <p className="home-subtitle">
+        {/* <p className="home-subtitle">
           Browse local gyms, check details and ratings, and help others by
           posting your own experience.
-        </p>
+        </p> */}
 
         <div className="home-actions">
           <Link to="/gyms" className="home-btn home-btn-primary">
